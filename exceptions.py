@@ -1,6 +1,6 @@
 
-class CantGetCoordinates(Exception):
-    """невозможно определить координаты"""
+class CantGetCity(Exception):
+    """невозможно определить город"""
 
 
 class ApiServiceError(Exception):
