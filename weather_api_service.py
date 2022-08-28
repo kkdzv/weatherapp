@@ -10,7 +10,7 @@ from urllib.error import URLError
 import config
 from exceptions import ApiServiceError
 
-from gps_coordinates import Coordinate
+from user_city import City
 
 Celsius = int
 
@@ -34,17 +34,15 @@ class Weather:
     city: str
 
 
-def get_weather(coordinates: Coordinate) -> Weather:
-    openweather_response = _get_openweather_response(
-        longitude=coordinates.longitude, latitude=coordinates.latitude)
+def get_weather(cities: City) -> Weather:
+    openweather_response = _get_openweather_response(user_city_id=cities.city_id)
     weather = _parse_openweather_response(openweather_response)
     return weather
 
 
-def _get_openweather_response(latitude: float, longitude: float) -> str:
+def _get_openweather_response(user_city_id: int) -> str:
     ssl.create_default_https_context = ssl.create_default_context()
-    url = config.OPENWEATHER_URL.format(
-        latitude=latitude, longitude=longitude)
+    url = config.OPENWEATHER_URL.format(city_id=user_city_id)
     try:
         return urllib.request.urlopen(url).read()
     except URLError:
@@ -100,4 +98,4 @@ def _parse_city(openweather_dict: dict) -> str:
 
 
 if __name__ == '__main__':
-    print(get_weather(Coordinate(latitude=20, longitude=10)))
+    print(get_weather(City(city_id=524901)))
