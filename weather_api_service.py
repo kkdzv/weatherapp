@@ -9,7 +9,6 @@ import urllib.request
 from urllib.error import URLError
 import config
 from exceptions import ApiServiceError
-
 from gps_coordinates import Coordinate
 
 Celsius = int
@@ -43,7 +42,7 @@ def get_weather(coordinates: Coordinate) -> Weather:
 
 def _get_openweather_response(latitude: float, longitude: float) -> str:
     ssl.create_default_https_context = ssl.create_default_context()
-    url = config.OPENWEATHER_URL.format(
+    url = config.OPENWEATHER_URL_WEATHER.format(
         latitude=latitude, longitude=longitude)
     try:
         return urllib.request.urlopen(url).read()
@@ -97,6 +96,8 @@ def _parse_sun_time(
 
 def _parse_city(openweather_dict: dict) -> str:
     return openweather_dict['name']
+
+
 
 
 if __name__ == '__main__':

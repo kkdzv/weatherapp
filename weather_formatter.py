@@ -2,10 +2,10 @@ from weather_api_service import Weather
 
 
 def format_weather(weather: Weather) -> str:
-    return (f"Расположение: {weather.city}, температура {weather.temperature} градусов Цельсия, "
-            f"{weather.weather_type}\n"
-            f"Восход: {weather.sunrise.strftime('%H:%M')}\n"
-            f"Закат: {weather.sunset.strftime('%H:%M')}\n")
+    return (f"/// В городе {weather.city} температура воздуха {weather.temperature} °C\n"
+            f"Сейчас: {weather.weather_type}\n"
+            f"Восход: {weather.sunrise.strftime('%H:%M')}"
+            f" **** Закат: {weather.sunset.strftime('%H:%M')} ///\n")
 
 
 if __name__ == "__main__":

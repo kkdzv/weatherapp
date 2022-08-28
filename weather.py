@@ -3,10 +3,12 @@ from weather_api_service import get_weather
 from weather_formatter import format_weather
 from exceptions import CantGetCoordinates, ApiServiceError
 
+USER_CITY = 'Voronezh'
+
 
 def main():
     try:
-        coordinates = get_coordinates()
+        coordinates = get_coordinates(USER_CITY)
     except CantGetCoordinates:
         print("Не удалось получить GPS координаты")
         exit(1)
